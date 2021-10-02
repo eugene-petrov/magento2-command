@@ -41,12 +41,11 @@ class SnippetCommand extends Command
             new InputOption('option-value', 'o', InputOption::VALUE_REQUIRED, 'Option value'),
             new InputArgument('arg', InputArgument::IS_ARRAY | InputArgument::REQUIRED, 'tokens to search for'),
         ]);
-        $this->setHelp(
-                <<<EOT
+        $this->setHelp(<<<EOT
 Demonstrates usage of custom commands
 <info>Contains options and attributes, works in different arias</info>
 EOT
-            );
+        );
     }
 
     /**
@@ -58,6 +57,8 @@ EOT
         $this->argumentAndOptionExample($input, $output);
         $this->emulateDifferentAreasExample($output);
         $this->emulateEnvironmentExample();
+
+        return 0;
     }
 
     /**
@@ -112,6 +113,7 @@ EOT
      * \Magento\Store\Model\App\Emulation:startEnvironmentEmulation
      * \Magento\Store\Model\App\Emulation:stopEnvironmentEmulation
      * @return void
+     * phpcs:disable Magento2.CodeAnalysis.EmptyBlock.DetectedFunction
      */
     private function emulateEnvironmentExample()
     {
