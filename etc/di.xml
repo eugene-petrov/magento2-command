@@ -5,8 +5,19 @@
     <type name="Magento\Framework\Console\CommandListInterface">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="snippetCommandName" xsi:type="object">Snippet\Command\Console\Command\SnippetCommand</item>
+                <item name="snippetCommand" xsi:type="object">Snippet\Command\Console\Command\SnippetCommand</item>
+                <item name="snippetCommandProgressBar" xsi:type="object">Snippet\Command\Console\Command\SnippetProgressBar</item>
             </argument>
+        </arguments>
+    </type>
+    <type name="Snippet\Command\Console\Command\SnippetCommand">
+        <arguments>
+            <argument name="name" xsi:type="string">snippet:command</argument>
+        </arguments>
+    </type>
+    <type name="Snippet\Command\Console\Command\SnippetProgressBar">
+        <arguments>
+            <argument name="name" xsi:type="string">snippet:command:progress</argument>
         </arguments>
     </type>
 </config>

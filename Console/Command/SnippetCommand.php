@@ -6,6 +6,7 @@ namespace Snippet\Command\Console\Command;
 
 use Magento\Framework\App\Area;
 use Magento\Framework\App\State;
+use Magento\Framework\Console\Cli;
 use Magento\Framework\Exception\LocalizedException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -22,10 +23,11 @@ class SnippetCommand extends Command
 
     /**
      * @param State $appState
+     * @param string|null $name
      */
-    public function __construct(State $appState)
+    public function __construct(State $appState, string $name = null)
     {
-        parent::__construct();
+        parent::__construct($name);
         $this->appState = $appState;
     }
 
@@ -34,7 +36,6 @@ class SnippetCommand extends Command
      */
     protected function configure()
     {
-        $this->setName('snippet:command');
         $this->setDescription('The command for demonstration.');
         $this->setDefinition([
             new InputOption('option-flag', 'f', InputOption::VALUE_NONE, 'Option flag'),
@@ -52,13 +53,18 @@ EOT
      * {@inheritdoc}
      * @throws \Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->argumentAndOptionExample($input, $output);
-        $this->emulateDifferentAreasExample($output);
-        $this->emulateEnvironmentExample();
+        try {
+            $this->argumentAndOptionExample($input, $output);
+            $this->emulateDifferentAreasExample($output);
+            $this->emulateEnvironmentExample();
+        } catch (LocalizedException $e) {
+            $output->writeln("<error>{$e->getMessage()}</error>");
+            return Cli::RETURN_FAILURE;
+        }
 
-        return 0;
+        return Cli::RETURN_SUCCESS;
     }
 
     /**
