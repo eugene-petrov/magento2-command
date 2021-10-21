@@ -32,7 +32,7 @@ class SnippetCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * @return void
      */
     protected function configure()
     {
@@ -50,7 +50,9 @@ EOT
     }
 
     /**
-     * {@inheritdoc}
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
      * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
