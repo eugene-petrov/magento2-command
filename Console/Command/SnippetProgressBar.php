@@ -40,7 +40,7 @@ class SnippetProgressBar extends Command
     }
 
     /**
-     * @inheritdoc
+     * @return void
      */
     protected function configure()
     {
@@ -53,7 +53,10 @@ EOT
     }
 
     /**
-     * @inheritdoc
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
